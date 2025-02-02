@@ -1,9 +1,14 @@
 /* Update color variables at the top */
 :root {
-    --primary-color: #e6a800; /* Darker gold for better contrast */
-    --dark-color: #1a1a1a;
-    --light-color: #f4f4f4;
-    --text-color: #333;
+    --primary-color: #1e3d59; /* Deep navy blue */
+    --secondary-color: #f5f5f5; /* Warm gray */
+    --accent-color: #17a2b8; /* Muted teal */
+    --dark-color: #2d2d2d;
+    --light-color: #ffffff;
+    --text-color: #2d2d2d;
+    --border-color: #e1e1e1;
+    --placeholder-color: #666666;
+    --hover-accent: #148a9c; /* Darker shade of accent color */
 }
 
 /* Reset and base styles */
@@ -16,7 +21,8 @@
 body {
     font-family: 'Roboto', sans-serif;
     line-height: 1.6;
-    color: #333;
+    color: var(--text-color);
+    background: var(--secondary-color);
 }
 
 /* Navigation */
@@ -24,20 +30,22 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background: transparent;
+    background: rgba(30, 61, 89, 0.95); /* Semi-transparent primary color */
     padding: 1.5rem;
     z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
     transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
 /* Add a class for when navbar should have background (on scroll) */
 .navbar.scrolled {
-    background: var(--dark-color);
+    background: var(--primary-color);
     padding: 1rem;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
 }
 
 .navbar.scrolled .logo,
@@ -46,7 +54,7 @@ body {
 }
 
 .logo {
-    color: var(--primary-color);
+    color: var(--light-color);
     font-size: 1.8rem;
     font-weight: 800;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
@@ -60,7 +68,7 @@ body {
 }
 
 .mobile-menu-btn .menu-bar {
-    background: #ffffff; /* Pure white for maximum contrast */
+    background: var(--light-color);
     height: 3px;
     width: 25px;
     margin: 5px 0;
@@ -88,7 +96,7 @@ body {
 }
 
 .nav-links a {
-    color: #fff;
+    color: var(--light-color);
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s;
@@ -96,7 +104,7 @@ body {
 }
 
 .nav-links a:hover {
-    color: var(--primary-color);
+    color: var(--accent-color);
 }
 
 /* Hero section */
@@ -104,8 +112,8 @@ body {
     min-height: 100vh;
     width: 100%;
     background: linear-gradient(
-        rgba(26, 26, 26, 0.85),
-        rgba(26, 26, 26, 0.85)
+        rgba(30, 61, 89, 0.75), /* Reduced opacity from 0.90 to 0.75 */
+        rgba(30, 61, 89, 0.75)
     ), url('images/plastering-hero.webp');
     background-size: cover;
     background-position: center;
@@ -122,8 +130,8 @@ body {
 @supports not (background-image: url('images/plastering-hero.webp')) {
     #hero {
         background-image: linear-gradient(
-            rgba(26, 26, 26, 0.85),
-            rgba(26, 26, 26, 0.85)
+            rgba(30, 61, 89, 0.75), /* Updated to match the WebP version */
+            rgba(30, 61, 89, 0.75)
         ), url('images/plastering-hero.jpg');
     }
 }
@@ -140,7 +148,7 @@ body {
 .hero-subtitle,
 .hero-content h1 {
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    color: #ffffff; /* Ensure pure white for maximum contrast */
+    color: var(--light-color);
 }
 
 /* Remove any inherited text shadow from buttons */
@@ -186,8 +194,8 @@ body {
     font-size: 1.2rem;
     min-height: 54px;
     /* Keep other styles but remove any display/alignment properties */
-    background: var(--primary-color);
-    color: var(--dark-color);
+    background: var(--accent-color);
+    color: var(--light-color);
     border: none;
     margin-top: 1rem;
     text-decoration: none;
@@ -196,9 +204,9 @@ body {
 }
 
 #hero .cta-button:hover {
-    background: #e5ac00; /* Darker shade of your gold */
+    background: var(--hover-accent);
     transform: translateY(-3px);
-    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+    box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3);
 }
 
 /* Media queries for hero section */
@@ -237,17 +245,19 @@ h2 {
 }
 
 .service-card {
-    background: var(--dark-color);
-    color: #fff;
+    background: var(--light-color);
+    color: var(--text-color);
     padding: 2.5rem;
-    border-radius: 8px;
-    transition: transform 0.3s;
+    border-radius: 12px;
+    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    height: 100%; /* Ensure all cards are same height */
+    height: 100%;
     display: flex;
     flex-direction: column;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
 }
 
 .service-card::before {
@@ -257,24 +267,27 @@ h2 {
     left: 0;
     width: 100%;
     height: 4px;
-    background: var(--primary-color);
+    background: var(--accent-color);
 }
 
 .service-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(23, 162, 184, 0.15);
+    border-color: var(--accent-color);
 }
 
 .service-card h3 {
     color: var(--primary-color);
     margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
 }
 
-/* Add service icons */
 .service-card i {
     font-size: 2.5rem;
-    color: var(--primary-color);
+    color: var(--accent-color);
     margin-bottom: 1rem;
-    height: 2.5rem; /* Match font-size */
+    height: 2.5rem;
     width: 2.5rem;
     display: inline-block;
 }
@@ -283,13 +296,13 @@ h2 {
     font-size: 1rem;
     line-height: 1.6;
     margin-top: 1rem;
-    color: #ffffff; /* Remove transparency for better contrast */
-    flex-grow: 1; /* Allow text to fill space */
+    color: var(--text-color);
+    flex-grow: 1;
 }
 
 /* Contact form */
 .contact-content {
-    background: #fff;
+    background: var(--light-color);
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 2px 15px rgba(0,0,0,0.1);
@@ -301,49 +314,34 @@ form {
     gap: 1rem;
 }
 
+/* Update form input and textarea placeholders */
+input::placeholder,
+textarea::placeholder,
+input::-moz-placeholder,
+textarea::-moz-placeholder,
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder,
+input::-ms-input-placeholder,
+textarea::-ms-input-placeholder {
+    font-family: 'Roboto', sans-serif;
+    color: var(--placeholder-color);
+    font-size: 1rem;
+    opacity: 1; /* Ensures consistent opacity across browsers */
+}
+
+/* Form elements base styles */
 input, textarea {
     padding: 0.8rem;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 5px;
     color: var(--text-color);
-    background: #fff;
+    background: var(--light-color);
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
 }
 
 textarea {
     min-height: 150px;
-}
-
-/* Update form input and textarea placeholders */
-input::placeholder,
-textarea::placeholder {
-    font-family: 'Roboto', sans-serif;
-    color: #666666; /* Darker placeholder text for better contrast */
-    font-size: 1rem;
-}
-
-/* For Firefox */
-input::-moz-placeholder,
-textarea::-moz-placeholder {
-    font-family: 'Roboto', sans-serif;
-    color: #666;
-    font-size: 1rem;
-    opacity: 1; /* Firefox sets opacity to 0.54 by default */
-}
-
-/* For Edge */
-input:-ms-input-placeholder,
-textarea:-ms-input-placeholder {
-    font-family: 'Roboto', sans-serif;
-    color: #666;
-    font-size: 1rem;
-}
-
-/* For IE */
-input::-ms-input-placeholder,
-textarea::-ms-input-placeholder {
-    font-family: 'Roboto', sans-serif;
-    color: #666;
-    font-size: 1rem;
 }
 
 /* Media Queries */
@@ -383,11 +381,11 @@ textarea::-ms-input-placeholder {
 
 /* Add CTA section styles */
 .cta-section {
-    background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url('images/plastering-hero.webp');
+    background: linear-gradient(rgba(30, 61, 89, 0.95), rgba(30, 61, 89, 0.95)), url('images/plastering-hero.webp');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    color: #fff;
+    color: var(--light-color);
     text-align: center;
     padding: 5rem 1rem;
 }
@@ -401,7 +399,7 @@ textarea::-ms-input-placeholder {
 .cta-section h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: var(--primary-color);
+    color: var(--accent-color);
 }
 
 .cta-section p {
@@ -470,7 +468,7 @@ textarea:focus {
 
 /* Add highlight for key points */
 .about-text .highlight {
-    color: var(--primary-color);
+    color: var(--accent-color);
     font-weight: 600;
 }
 
@@ -505,8 +503,8 @@ section {
     font-size: 1.1rem;
     padding: 0.8rem 2.5rem;
     border-radius: 50px;
-    background: var(--primary-color);
-    color: var(--dark-color);
+    background: var(--accent-color);
+    color: var(--light-color);
     border: none;
     text-decoration: none;
     font-weight: 600;
@@ -516,9 +514,9 @@ section {
 }
 
 .cta-button:hover {
-    background: #e5ac00;
+    background: var(--hover-accent);
     transform: translateY(-3px);
-    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+    box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3);
 }
 
 /* Gallery Section */
@@ -600,7 +598,7 @@ section {
 
 .badge i {
     font-size: 2rem;
-    color: var(--primary-color);
+    color: var(--accent-color);
     margin-bottom: 0.5rem;
 }
 
@@ -634,16 +632,16 @@ section {
 
 .cta-secondary {
     background: transparent;
-    border: 2px solid var(--primary-color);
-    color: var(--primary-color);
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .cta-secondary:hover {
-    background: var(--primary-color);
-    color: var(--dark-color);
+    background: var(--accent-color);
+    color: var(--light-color);
 }
 
 .testimonial {
@@ -656,11 +654,11 @@ section {
     font-size: 1.1rem;
     font-style: italic;
     margin-bottom: 1rem;
-    color: #ffffff;
+    color: var(--light-color);
 }
 
 .testimonial .author {
-    color: var(--primary-color);
+    color: var(--accent-color);
     font-weight: 600;
 }
 
@@ -719,41 +717,48 @@ section {
     background: var(--light-color);
     border-radius: 8px;
     margin-top: 2rem;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three equal columns */
+    gap: 1.5rem;
 }
 
-.contact-info p {
+/* Style for standard contact items */
+.contact-info .phone,
+.contact-info .email,
+.contact-info .availability {
     font-size: 1.1rem;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
     margin: 0;
     white-space: nowrap;
 }
 
-.contact-info i {
-    color: var(--primary-color);
-    font-size: 1.2rem;
+/* Full width for area text */
+.contact-info .area {
+    grid-column: 1 / -1; /* Span all columns */
+    max-width: 800px;
+    line-height: 1.6;
+    margin: 0.5rem auto 0;
+    padding: 1rem 0 0;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    white-space: normal;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
 }
 
-/* Remove the border since items are now in a row */
-.contact-info .availability {
-    margin-top: 0;
-    padding-top: 0;
-    border-top: none;
-}
-
-/* Stack items on mobile */
+/* Mobile styles */
 @media (max-width: 768px) {
     .contact-info {
-        flex-direction: column;
+        grid-template-columns: 1fr; /* Stack vertically on mobile */
         gap: 1rem;
     }
 
-    .contact-info p {
+    .contact-info .phone,
+    .contact-info .email,
+    .contact-info .availability {
         justify-content: center;
     }
 }
@@ -775,11 +780,11 @@ section {
 }
 
 .placeholder-image.before {
-    background: linear-gradient(45deg, #2c3e50, #3498db);
+    background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
 }
 
 .placeholder-image.after {
-    background: linear-gradient(45deg, #27ae60, #2ecc71);
+    background: linear-gradient(45deg, var(--accent-color), var(--hover-accent));
     opacity: 0;
 }
 
@@ -797,26 +802,7 @@ section {
     border-radius: 4px;
     text-transform: uppercase;
     letter-spacing: 2px;
-}
-
-.contact-info .area {
-    max-width: 600px;
-    line-height: 1.6;
-    margin: 0 auto;
-    white-space: normal; /* Allows text to wrap */
-}
-
-/* Adjust icon alignment for wrapped text */
-.contact-info .area i {
-    vertical-align: top;
-    margin-top: 4px; /* Aligns icon with first line of text */
-}
-
-@media (max-width: 768px) {
-    .contact-info .area {
-        max-width: 100%;
-        padding: 0 1rem;
-    }
+    color: var(--light-color);
 }
 
 /* Hide decorative icons from screen readers */
@@ -863,8 +849,8 @@ section {
     white-space: nowrap;
 
     /* Appearance */
-    background: var(--primary-color);
-    color: var(--dark-color);
+    background: var(--accent-color);
+    color: var(--light-color);
     border: none;
     border-radius: 50px;
     cursor: pointer;
@@ -875,21 +861,21 @@ section {
 
 /* Button hover state */
 .cta-button:hover {
-    background: #e5ac00;
+    background: var(--hover-accent);
     transform: translateY(-3px);
-    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+    box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3);
 }
 
 /* Secondary button variant */
 .cta-secondary {
     background: transparent;
-    border: 2px solid var(--primary-color);
-    color: var(--primary-color);
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
 }
 
 .cta-secondary:hover {
-    background: var(--primary-color);
-    color: var(--dark-color);
+    background: var(--accent-color);
+    color: var(--light-color);
 }
 
 /* Hero section button modifications */
@@ -938,5 +924,21 @@ section {
 
     .cta-divider {
         margin: 0.5rem 0;
+    }
+}
+/* Update service areas text in hero section */
+.service-areas {
+    color: var(--light-color);
+    margin-top: 3rem; /* Increase spacing from buttons */
+    font-size: 1.1rem;
+    opacity: 0.9; /* Slightly softer white */
+    line-height: 1.6;
+}
+
+/* Adjust spacing on mobile */
+@media (max-width: 768px) {
+    .service-areas {
+        margin-top: 2rem; /* Slightly less spacing on mobile */
+        font-size: 1rem;
     }
 }
