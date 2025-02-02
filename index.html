@@ -9,6 +9,51 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="description" content="Professional plastering services in Liverpool & Merseyside. Specializing in internal plastering, external rendering, and repairs. Free quotes within 24 hours. Fully insured plasterer serving Allerton, Aigburth, Mossley Hill, Woolton and surrounding areas.">
+    <meta name="keywords" content="plasterer liverpool, plastering services merseyside, rendering liverpool, local plasterer, wall repairs liverpool, ceiling repairs merseyside, skimming liverpool, artex removal liverpool">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "JT Plastering",
+      "image": "images/plastering-hero.jpg",
+      "description": "Professional plastering and rendering services in Liverpool & Merseyside. Fully insured with over a decade of experience.",
+      "@id": "https://jtplastering.co.uk",
+      "url": "https://jtplastering.co.uk",
+      "telephone": "07957786876",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "Merseyside",
+        "addressLocality": "Liverpool",
+        "addressCountry": "GB"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 53.4084,
+        "longitude": -2.9916
+      },
+      "areaServed": ["Liverpool", "Merseyside", "Allerton", "Aigburth", "Mossley Hill", "Woolton", "Crosby", "Waterloo", "Bootle", "Aintree", "Walton", "Anfield"],
+      "priceRange": "££",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "08:00",
+        "closes": "18:00"
+      }
+    }
+    </script>
+    <meta property="og:title" content="JT Plastering | Professional Plastering Services in Liverpool">
+    <meta property="og:description" content="Professional plastering services in Liverpool & Merseyside. Specializing in internal plastering, external rendering, and repairs. Free quotes within 24 hours.">
+    <meta property="og:image" content="images/plastering-hero.jpg">
+    <meta property="og:url" content="https://jtplastering.co.uk">
 </head>
 <body>
     <header>
@@ -39,6 +84,7 @@
                     <span class="cta-divider">or</span>
                     <a href="#contact" class="cta-button cta-secondary">Message for a Quote</a>
                 </div>
+                <p class="service-areas">Serving Liverpool, Allerton, Aigburth, Mossley Hill, Woolton and all surrounding areas</p>
             </div>
         </section>
 
@@ -153,9 +199,10 @@
                     <span class="cta-divider">or</span>
                     <a href="#contact" class="cta-button cta-secondary">Send a Message</a>
                 </div>
-                <div class="testimonial">
-                    <p class="quote">"Guile did an amazing job plastering our entire house. Professional, clean and a perfect finish!"</p>
-                    <p class="author">- John, Allerton</p>
+                <div class="testimonial" itemscope itemtype="https://schema.org/Review">
+                    <p class="quote" itemprop="reviewBody">"Guile did an amazing job plastering our entire house. Professional, clean and a perfect finish!"</p>
+                    <p class="author" itemprop="author">- John, <span itemprop="locationCreated">Allerton, Liverpool</span></p>
+                    <meta itemprop="datePublished" content="2024-03-20">
                 </div>
             </div>
         </section>
@@ -179,19 +226,22 @@
                            inputmode="numeric"
                            autocomplete="tel"
                            maxlength="11">
+                    <input type="text"
+                           name="location"
+                           placeholder="Your Area (e.g., Allerton, Aigburth)"
+                           autocomplete="address-level2">
                     <textarea name="message" placeholder="Tell me about your project" required></textarea>
                     <button type="submit" class="cta-button">Send Message</button>
                 </form>
                 <div class="contact-info">
                     <p class="phone"><i class="fas fa-phone"></i> 07957 786 876</p>
                     <p class="email"><i class="fas fa-envelope"></i> info@jtplastering.co.uk</p>
-                    <p class="area"><i class="fas fa-map-marker-alt"></i> Liverpool & surrounding areas</p>
+                    <p class="area"><i class="fas fa-map-marker-alt"></i> Serving Liverpool City Centre, Allerton, Aigburth, Mossley Hill, Woolton, Childwall, Wavertree, Crosby, Waterloo, Bootle, Aintree, Walton, Anfield, and all surrounding areas in Merseyside</p>
                     <p class="availability"><i class="fas fa-clock"></i> Available 7 days a week</p>
                 </div>
             </div>
         </section>
     </main>
-
     <script src="script.js"></script>
 </body>
 </html>

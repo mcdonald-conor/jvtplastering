@@ -754,3 +754,23 @@ section {
     text-transform: uppercase;
     letter-spacing: 2px;
 }
+
+.contact-info .area {
+    max-width: 600px;
+    line-height: 1.6;
+    margin: 0 auto;
+    white-space: normal; /* Allows text to wrap */
+}
+
+/* Adjust icon alignment for wrapped text */
+.contact-info .area i {
+    vertical-align: top;
+    margin-top: 4px; /* Aligns icon with first line of text */
+}
+
+@media (max-width: 768px) {
+    .contact-info .area {
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+}
