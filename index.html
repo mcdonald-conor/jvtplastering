@@ -8,7 +8,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          media="print"
+          onload="this.media='all'">
     <meta name="description" content="Professional plastering services in Liverpool & Merseyside. Specializing in internal plastering, external rendering, and repairs. Free quotes within 24 hours. Fully insured plasterer serving Allerton, Aigburth, Mossley Hill, Woolton and surrounding areas.">
     <meta name="keywords" content="plasterer liverpool, plastering services merseyside, rendering liverpool, local plasterer, wall repairs liverpool, ceiling repairs merseyside, skimming liverpool, artex removal liverpool">
     <script type="application/ld+json">
@@ -54,15 +56,28 @@
     <meta property="og:description" content="Professional plastering services in Liverpool & Merseyside. Specializing in internal plastering, external rendering, and repairs. Free quotes within 24 hours.">
     <meta property="og:image" content="images/plastering-hero.jpg">
     <meta property="og:url" content="https://jtplastering.co.uk">
+    <style>
+        /* Add critical CSS here */
+        :root {
+            --primary-color: #e6a800;
+            --dark-color: #1a1a1a;
+        }
+        /* Add other critical styles... */
+    </style>
+    <script src="script.js" defer></script>
+    <link rel="preload"
+          as="image"
+          href="images/plastering-hero.webp"
+          type="image/webp">
 </head>
 <body>
     <header>
         <nav class="navbar">
             <div class="logo">JT Plastering</div>
-            <button class="mobile-menu-btn">
-                <span></span>
-                <span></span>
-                <span></span>
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
             </button>
             <ul class="nav-links">
                 <li><a href="#top">Home</a></li>
@@ -195,9 +210,9 @@
                 <h2>Ready to Transform Your Space?</h2>
                 <p>Choose how you'd like to get in touch - I'll respond within 24 hours</p>
                 <div class="cta-buttons">
-                    <a href="tel:07957786876" class="cta-button">Call Direct: 07957 786 876</a>
+                    <a href="tel:07957786876" class="cta-button flex items-center justify-center">Call Direct: 07957 786 876</a>
                     <span class="cta-divider">or</span>
-                    <a href="#contact" class="cta-button cta-secondary">Send a Message</a>
+                    <a href="#contact" class="cta-button cta-secondary flex items-center justify-center">Send a Message</a>
                 </div>
                 <div class="testimonial" itemscope itemtype="https://schema.org/Review">
                     <p class="quote" itemprop="reviewBody">"Guile did an amazing job plastering our entire house. Professional, clean and a perfect finish!"</p>
@@ -226,12 +241,9 @@
                            inputmode="numeric"
                            autocomplete="tel"
                            maxlength="11">
-                    <input type="text"
-                           name="location"
-                           placeholder="Your Area (e.g., Allerton, Aigburth)"
-                           autocomplete="address-level2">
+
                     <textarea name="message" placeholder="Tell me about your project" required></textarea>
-                    <button type="submit" class="cta-button">Send Message</button>
+                    <button type="submit" class="cta-button" aria-label="Send contact form message">Send Message</button>
                 </form>
                 <div class="contact-info">
                     <p class="phone"><i class="fas fa-phone"></i> 07957 786 876</p>
@@ -242,6 +254,5 @@
             </div>
         </section>
     </main>
-    <script src="script.js"></script>
 </body>
 </html>
