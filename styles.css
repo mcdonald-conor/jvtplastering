@@ -1,0 +1,735 @@
+/* Update color variables at the top */
+:root {
+    --primary-color: #ffc107; /* Gold accent color */
+    --dark-color: #1a1a1a;
+    --light-color: #f4f4f4;
+    --text-color: #333;
+}
+
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: transparent;
+    padding: 1.5rem;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+/* Add a class for when navbar should have background (on scroll) */
+.navbar.scrolled {
+    background: var(--dark-color);
+    padding: 1rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.navbar.scrolled .logo,
+.navbar.scrolled .nav-links a {
+    text-shadow: none;
+}
+
+.logo {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.mobile-menu-btn {
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.mobile-menu-btn span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: #fff;
+    margin: 5px 0;
+    transition: 0.3s;
+}
+
+.nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: transparent;
+    padding: 1rem;
+}
+
+.nav-links.active {
+    display: block;
+}
+
+.nav-links li {
+    list-style: none;
+    margin: 1rem 0;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+/* Hero section */
+#hero {
+    min-height: 100vh;
+    width: 100%;
+    background: linear-gradient(
+        rgba(26, 26, 26, 0.85),
+        rgba(26, 26, 26, 0.85)
+    ), url('images/plastering-hero.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -80px;
+    padding-top: 80px;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Keep text shadow only on text elements, not buttons */
+.hero-subtitle,
+.hero-content h1 {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Remove any inherited text shadow from buttons */
+.cta-button {
+    text-shadow: none;
+}
+
+.hero-subtitle {
+    color: #fff;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+    color: #fff;
+    text-transform: none;
+}
+
+.hero-content h1 strong {
+    font-weight: 600;
+}
+
+/* Update CTA button in hero section */
+#hero .cta-button {
+    font-size: 1.2rem;
+    padding: 1rem 3rem;
+    border-radius: 50px;
+    background: var(--primary-color);
+    color: var(--dark-color);
+    border: none;
+    margin-top: 1rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+#hero .cta-button:hover {
+    background: #e5ac00; /* Darker shade of your gold */
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+}
+
+/* Media queries for hero section */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+}
+
+/* Sections */
+section {
+    padding: 3rem 1rem;
+    scroll-margin-top: 80px; /* Adjust this value based on your navbar height */
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Services */
+.services-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+}
+
+.service-card {
+    background: var(--dark-color);
+    color: #fff;
+    padding: 2.5rem;
+    border-radius: 8px;
+    transition: transform 0.3s;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    height: 100%; /* Ensure all cards are same height */
+    display: flex;
+    flex-direction: column;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--primary-color);
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+
+.service-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+/* Add service icons */
+.service-card i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.service-card p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-top: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    flex-grow: 1; /* Allow text to fill space */
+}
+
+/* Contact form */
+.contact-content {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+input, textarea {
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    color: var(--text-color);
+    background: #fff;
+}
+
+textarea {
+    min-height: 150px;
+}
+
+/* Update form input and textarea placeholders */
+input::placeholder,
+textarea::placeholder {
+    font-family: 'Roboto', sans-serif;
+    color: #666;
+    font-size: 1rem;
+}
+
+/* For Firefox */
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+    font-family: 'Roboto', sans-serif;
+    color: #666;
+    font-size: 1rem;
+    opacity: 1; /* Firefox sets opacity to 0.54 by default */
+}
+
+/* For Edge */
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+    font-family: 'Roboto', sans-serif;
+    color: #666;
+    font-size: 1rem;
+}
+
+/* For IE */
+input::-ms-input-placeholder,
+textarea::-ms-input-placeholder {
+    font-family: 'Roboto', sans-serif;
+    color: #666;
+    font-size: 1rem;
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+    .mobile-menu-btn {
+        display: none;
+    }
+
+    .nav-links {
+        display: flex;
+        position: static;
+        width: auto;
+        padding: 0;
+    }
+
+    .nav-links li {
+        margin: 0 1rem;
+    }
+
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2.5rem;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr); /* Keep 2 columns for better readability */
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+}
+
+/* Add CTA section styles */
+.cta-section {
+    background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url('images/plastering-hero.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #fff;
+    text-align: center;
+    padding: 5rem 1rem;
+}
+
+.cta-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.cta-section p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+/* Add container class */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Add focus styles for accessibility */
+.cta-button:focus,
+input:focus,
+textarea:focus {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Update about section styles */
+#about {
+    background: var(--light-color);
+    padding: 6rem 1rem;
+}
+
+.about-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.about-text {
+    background: #fff;
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.about-text h3 {
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    color: var(--dark-color);
+    line-height: 1.3;
+}
+
+.about-text p {
+    margin-bottom: 1.8rem;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    line-height: 1.8;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.about-text h4 {
+    font-size: 1.6rem;
+    color: var(--dark-color);
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid var(--light-color);
+}
+
+/* Add highlight for key points */
+.about-text .highlight {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Remove the old bullet point list styles */
+.about-content ul {
+    list-style: none;
+}
+
+.about-content li {
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+/* Add smooth scrolling behavior to html */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Add scroll-margin-top to sections to account for fixed navbar */
+section {
+    scroll-margin-top: 80px; /* Adjust this value based on your navbar height */
+}
+
+/* Add ID for top of page */
+#top {
+    scroll-margin-top: 0;
+}
+
+/* Update all other CTA buttons to match */
+.cta-button {
+    font-size: 1.1rem;
+    padding: 0.8rem 2.5rem;
+    border-radius: 50px;
+    background: var(--primary-color);
+    color: var(--dark-color);
+    border: none;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.cta-button:hover {
+    background: #e5ac00;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+}
+
+/* Gallery Section */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.gallery-item {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+}
+
+.gallery-image {
+    position: relative;
+    padding-top: 75%; /* 4:3 Aspect Ratio */
+    overflow: hidden;
+}
+
+.gallery-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-image img:last-child {
+    opacity: 0;
+}
+
+.gallery-item:hover .gallery-image img:last-child {
+    opacity: 1;
+}
+
+.gallery-caption {
+    padding: 1.5rem;
+}
+
+.gallery-caption h3 {
+    color: var(--dark-color);
+    margin-bottom: 0.5rem;
+}
+
+.gallery-caption p {
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+/* Trust Badges */
+.trust-badges {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+}
+
+.badge {
+    text-align: center;
+    padding: 1rem;
+}
+
+.badge i {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+/* Enhanced CTA Section */
+.cta-buttons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+}
+
+.cta-divider {
+    color: #fff;
+    font-size: 1.1rem;
+    margin: 0 0.5rem;
+    opacity: 0.8;
+}
+
+.cta-secondary {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.cta-secondary:hover {
+    background: var(--primary-color);
+    color: var(--dark-color);
+}
+
+.testimonial {
+    max-width: 600px;
+    margin: 3rem auto 0;
+    text-align: center;
+}
+
+.testimonial .quote {
+    font-size: 1.1rem;
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+.testimonial .author {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Update mobile menu styles */
+@media (max-width: 767px) {
+    .nav-links.active {
+        background: var(--dark-color);
+        padding: 1rem;
+    }
+}
+
+/* Update responsive styles */
+@media (max-width: 768px) {
+    .cta-buttons {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .cta-divider {
+        margin: 0.5rem 0;
+    }
+}
+
+/* Update contact info styles */
+.contact-info {
+    text-align: center;
+    padding: 2rem;
+    background: var(--light-color);
+    border-radius: 8px;
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.contact-info p {
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.contact-info i {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+/* Remove the border since items are now in a row */
+.contact-info .availability {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+}
+
+/* Stack items on mobile */
+@media (max-width: 768px) {
+    .contact-info {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .contact-info p {
+        justify-content: center;
+    }
+}
+
+/* Placeholder styles for gallery images */
+.placeholder-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #fff;
+    transition: opacity 0.3s ease;
+}
+
+.placeholder-image.before {
+    background: linear-gradient(45deg, #2c3e50, #3498db);
+}
+
+.placeholder-image.after {
+    background: linear-gradient(45deg, #27ae60, #2ecc71);
+    opacity: 0;
+}
+
+.gallery-item:hover .placeholder-image.before {
+    opacity: 0;
+}
+
+.gallery-item:hover .placeholder-image.after {
+    opacity: 1;
+}
+
+.placeholder-image span {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0.5rem 2rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
