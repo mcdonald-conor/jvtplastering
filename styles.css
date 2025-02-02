@@ -58,6 +58,20 @@ body {
     font-size: 1.8rem;
     font-weight: 800;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo i {
+    color: var(--accent-color);
+    transform: rotate(-15deg);
+    transition: transform 0.3s ease;
+    font-size: 1.6rem;
+}
+
+.navbar:hover .logo i {
+    transform: rotate(0deg);
 }
 
 .mobile-menu-btn {
@@ -240,14 +254,15 @@ h2 {
 /* Services */
 .services-grid {
     display: grid;
-    gap: 2rem;
+    gap: 2.5rem;
     grid-template-columns: 1fr;
+    position: relative;
 }
 
 .service-card {
     background: var(--light-color);
     color: var(--text-color);
-    padding: 2.5rem;
+    padding: 3rem 2.5rem;
     border-radius: 12px;
     transition: all 0.3s ease;
     position: relative;
@@ -260,6 +275,19 @@ h2 {
     box-shadow: 0 4px 20px rgba(0,0,0,0.05);
 }
 
+/* Add decorative top pattern */
+.service-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+    opacity: 0.03;
+    transition: all 0.3s ease;
+}
+
 .service-card::before {
     content: '';
     position: absolute;
@@ -268,6 +296,7 @@ h2 {
     width: 100%;
     height: 4px;
     background: var(--accent-color);
+    z-index: 1;
 }
 
 .service-card:hover {
@@ -276,28 +305,80 @@ h2 {
     border-color: var(--accent-color);
 }
 
+.service-card:hover::after {
+    opacity: 0.06;
+}
+
 .service-card h3 {
     color: var(--primary-color);
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.75rem;
     font-weight: 600;
+    position: relative;
+    z-index: 2;
+}
+
+/* Icon container */
+.service-card .icon-container {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--accent-color), var(--hover-accent));
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 2;
+    transform: rotate(-5deg);
+    transition: all 0.3s ease;
+}
+
+.service-card:hover .icon-container {
+    transform: rotate(0deg) scale(1.05);
 }
 
 .service-card i {
     font-size: 2.5rem;
-    color: var(--accent-color);
-    margin-bottom: 1rem;
-    height: 2.5rem;
-    width: 2.5rem;
-    display: inline-block;
+    color: var(--light-color);
+    transform: rotate(5deg);
+    transition: all 0.3s ease;
+}
+
+.service-card:hover i {
+    transform: rotate(0deg);
 }
 
 .service-card p {
-    font-size: 1rem;
-    line-height: 1.6;
+    font-size: 1.1rem;
+    line-height: 1.8;
     margin-top: 1rem;
     color: var(--text-color);
     flex-grow: 1;
+    position: relative;
+    z-index: 2;
+}
+
+/* Add emphasis to key phrases */
+.service-card p .emphasis {
+    color: var(--accent-color);
+    font-weight: 600;
+    display: inline-block;
+    position: relative;
+    z-index: 2;
+}
+
+/* Optional: Add a subtle underline effect on hover */
+.service-card p .emphasis:hover {
+    color: var(--hover-accent);
+}
+
+/* Service cards grid layout */
+@media (min-width: 768px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2.5rem;
+    }
 }
 
 /* Contact form */
@@ -400,6 +481,30 @@ textarea {
     font-size: 2.5rem;
     margin-bottom: 1rem;
     color: var(--accent-color);
+}
+
+.cta-section h2 strong {
+    color: var(--light-color);
+    font-weight: 800;
+    font-size: 1.1em;
+    display: inline-block;
+    position: relative;
+}
+
+.cta-section h2 strong::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--light-color);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.cta-section h2:hover strong::after {
+    transform: scaleX(1);
 }
 
 .cta-section p {
@@ -940,5 +1045,80 @@ section {
     .service-areas {
         margin-top: 2rem; /* Slightly less spacing on mobile */
         font-size: 1rem;
+    }
+}
+
+/* WhatsApp Widget */
+.whatsapp-widget {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 999;
+}
+
+.whatsapp-button {
+    background-color: #25D366;
+    color: var(--light-color);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    transition: all 0.3s ease;
+}
+
+.whatsapp-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
+}
+
+.whatsapp-button i {
+    font-size: 2rem;
+}
+
+/* Add tooltip */
+.whatsapp-button::before {
+    content: 'Chat with us on WhatsApp';
+    position: absolute;
+    right: 70px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--dark-color);
+    color: var(--light-color);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.whatsapp-button:hover::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .whatsapp-widget {
+        bottom: 1.5rem;
+        right: 1.5rem;
+    }
+
+    .whatsapp-button {
+        width: 50px;
+        height: 50px;
+    }
+
+    .whatsapp-button i {
+        font-size: 1.75rem;
+    }
+
+    .whatsapp-button::before {
+        display: none; /* Hide tooltip on mobile */
     }
 }
