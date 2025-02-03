@@ -128,29 +128,39 @@ body {
 #hero {
     min-height: 100vh;
     width: 100%;
-    background: linear-gradient(
-        rgba(30, 61, 89, 0.75), /* Reduced opacity from 0.90 to 0.75 */
-        rgba(30, 61, 89, 0.75)
-    ), url('images/plastering-hero.webp');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-color: var(--primary-color);
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: -80px;
     padding-top: 80px;
     text-align: center;
+    contain: layout paint;
 }
 
-/* Add fallback for browsers that don't support WebP */
-@supports not (background-image: url('images/plastering-hero.webp')) {
-    #hero {
-        background-image: linear-gradient(
-            rgba(30, 61, 89, 0.75), /* Updated to match the WebP version */
-            rgba(30, 61, 89, 0.75)
-        ), url('images/plastering-hero.jpg');
-    }
+/* Load background image after critical content */
+#hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(
+        rgba(30, 61, 89, 0.75),
+        rgba(30, 61, 89, 0.75)
+    ), url('images/plastering-hero.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#hero.loaded::before {
+    opacity: 1;
 }
 
 .hero-content {
@@ -656,9 +666,8 @@ section {
 
 .gallery-image {
     position: relative;
-    aspect-ratio: 4/3;
-    height: 0;
-    padding-bottom: 75%;
+    padding-top: 75%; /* 4:3 Aspect Ratio */
+    background-color: var(--secondary-color);
     contain: layout paint;
 }
 
@@ -669,15 +678,6 @@ section {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: opacity 0.3s ease;
-}
-
-.gallery-image img:last-child {
-    opacity: 0;
-}
-
-.gallery-item:hover .gallery-image img:last-child {
-    opacity: 1;
 }
 
 .gallery-caption {
@@ -723,6 +723,7 @@ section {
     max-width: 100%;
     margin-top: 2rem;
     min-height: 60px; /* Reserve space for buttons */
+    contain: layout paint;
 }
 
 .cta-button {
@@ -1061,6 +1062,9 @@ section {
     bottom: 2rem;
     right: 2rem;
     z-index: 999;
+    width: 60px;
+    height: 60px;
+    contain: layout paint;
 }
 
 .whatsapp-button {
@@ -1130,24 +1134,28 @@ section {
     }
 }
 
-/* Prevent layout shifts in images */
+/* Prevent layout shifts */
 img {
-    aspect-ratio: attr(width) / attr(height);
-    contain: paint;
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
-/* Add font display swap for text rendering */
+/* Optimize font loading */
 @font-face {
     font-family: 'Roboto';
     font-display: swap;
 }
 
-/* Optimize animations for performance */
-@media (prefers-reduced-motion: no-preference) {
-    .service-card,
-    .cta-button,
-    .gallery-item {
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        will-change: transform;
-    }
+/* Use passive loading for non-critical images */
+.gallery-image img {
+    loading: lazy;
+}
+
+/* Add content-visibility for off-screen content */
+#services,
+#gallery,
+#contact {
+    content-visibility: auto;
+    contain-intrinsic-size: 700px;
 }
