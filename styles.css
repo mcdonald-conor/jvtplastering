@@ -1,39 +1,28 @@
-/* Base styles */
+/* Update color variables at the top */
 :root {
-    --primary-color: #1e3d59;
-    --secondary-color: #f5f5f5;
-    --accent-color: #17a2b8;
+    --primary-color: #1e3d59; /* Deep navy blue */
+    --secondary-color: #f5f5f5; /* Warm gray */
+    --accent-color: #17a2b8; /* Muted teal */
     --dark-color: #2d2d2d;
     --light-color: #ffffff;
-    --hover-accent: #148a9c;
+    --text-color: #2d2d2d;
+    --border-color: #e1e1e1;
+    --placeholder-color: #666666;
+    --hover-accent: #148a9c; /* Darker shade of accent color */
 }
 
-/* Reset */
+/* Reset and base styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Typography */
 body {
     font-family: 'Roboto', sans-serif;
     line-height: 1.6;
-    color: var(--dark-color);
+    color: var(--text-color);
     background: var(--secondary-color);
-}
-
-/* Layout containers */
-.container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-}
-
-section {
-    padding: 3rem 1rem;
-    scroll-margin-top: 80px;
 }
 
 /* Navigation */
@@ -41,59 +30,130 @@ section {
     position: fixed;
     top: 0;
     width: 100%;
-    height: 80px;
-    background: rgba(30, 61, 89, 0.95);
+    background: rgba(30, 61, 89, 0.95); /* Semi-transparent primary color */
+    padding: 1.5rem;
     z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
-    contain: layout size;
+    transition: all 0.3s ease;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
+    min-height: 70px;
+    height: auto;
+    contain: layout paint;
+}
+
+/* Add a class for when navbar should have background (on scroll) */
+.navbar.scrolled {
+    background: var(--primary-color);
+    padding: 1rem;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+}
+
+.navbar.scrolled .logo,
+.navbar.scrolled .nav-links a {
+    text-shadow: none;
 }
 
 .logo {
     color: var(--light-color);
     font-size: 1.8rem;
     font-weight: 800;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    height: 40px;
-    min-width: 200px;
-    contain: layout size;
 }
 
 .logo i {
     color: var(--accent-color);
     transform: rotate(-15deg);
     transition: transform 0.3s ease;
-    width: 24px;
-    height: 24px;
-    contain: layout size;
+    font-size: 1.6rem;
+}
+
+.navbar:hover .logo i {
+    transform: rotate(0deg);
+}
+
+.mobile-menu-btn {
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.mobile-menu-btn .menu-bar {
+    background: var(--light-color);
+    height: 3px;
+    width: 25px;
+    margin: 5px 0;
+    display: block;
+    transition: 0.3s;
+}
+
+.nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: transparent;
+    padding: 1rem;
+}
+
+.nav-links.active {
+    display: block;
+}
+
+.nav-links li {
+    list-style: none;
+    margin: 1rem 0;
+}
+
+.nav-links a {
+    color: var(--light-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.nav-links a:hover {
+    color: var(--accent-color);
 }
 
 /* Hero section */
 #hero {
-    min-height: calc(100vh - 80px);
-    margin-top: 80px;
+    min-height: 100vh;
+    width: 100%;
     background-color: var(--primary-color);
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: -80px;
+    padding-top: 80px;
     text-align: center;
-    contain: layout paint size;
-    position: relative;
+    contain: layout paint;
 }
 
+/* Load background image after critical content */
 #hero::before {
     content: '';
     position: absolute;
-    inset: 0;
-    background-image: linear-gradient(rgba(30, 61, 89, 0.75), rgba(30, 61, 89, 0.75)), url('images/plastering-hero.webp');
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(
+        rgba(30, 61, 89, 0.75),
+        rgba(30, 61, 89, 0.75)
+    ), url('images/plastering-hero.webp');
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     z-index: -1;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -103,26 +163,476 @@ section {
     opacity: 1;
 }
 
-/* Buttons */
+.hero-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+    min-height: 60vh;
+    height: auto;
+    width: 100%;
+    contain: layout paint;
+}
+
+/* Keep text shadow only on text elements, not buttons */
+.hero-subtitle,
+.hero-content h1 {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    color: var(--light-color);
+}
+
+/* Remove any inherited text shadow from buttons */
 .cta-button {
+    text-shadow: none;
+    color: #000000; /* Darker text color for better contrast on gold background */
+    font-weight: 700; /* Bolder text for better visibility */
+    display: flex !important; /* Force flex display */
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center;
+    min-height: 48px;
+    line-height: 1.2;
+    padding: 0.75rem 2rem; /* Consistent padding */
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    contain: layout paint;
+}
+
+.hero-subtitle {
+    color: #fff;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+    color: #fff;
+    text-transform: none;
+}
+
+.hero-content h1 strong {
+    font-weight: 600;
+}
+
+/* Update CTA button in hero section */
+#hero .cta-button {
+    font-size: 1.2rem;
+    min-height: 54px;
+    /* Keep other styles but remove any display/alignment properties */
+    background: var(--accent-color);
+    color: var(--light-color);
+    border: none;
+    margin-top: 1rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+#hero .cta-button:hover {
+    background: var(--hover-accent);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3);
+}
+
+/* Media queries for hero section */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+}
+
+/* Sections */
+section {
+    padding: 3rem 1rem;
+    scroll-margin-top: 80px; /* Adjust this value based on your navbar height */
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Services */
+.services-grid {
+    display: grid;
+    gap: 2.5rem;
+    grid-template-columns: 1fr;
+    position: relative;
+}
+
+.service-card {
+    background: var(--light-color);
+    color: var(--text-color);
+    padding: 3rem 2.5rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+/* Add decorative top pattern */
+.service-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+    opacity: 0.03;
+    transition: all 0.3s ease;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--accent-color);
+    z-index: 1;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(23, 162, 184, 0.15);
+    border-color: var(--accent-color);
+}
+
+.service-card:hover::after {
+    opacity: 0.06;
+}
+
+.service-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.75rem;
+    font-weight: 600;
+    position: relative;
+    z-index: 2;
+}
+
+/* Icon container */
+.service-card .icon-container {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--accent-color), var(--hover-accent));
+    border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 48px;
-    min-height: 48px;
-    width: 100%;
-    max-width: 300px;
-    padding: 0 2rem;
-    margin: 0 auto;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--light-color);
-    background: var(--accent-color);
-    border: none;
-    border-radius: 50px;
-    text-decoration: none;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 2;
+    transform: rotate(-5deg);
     transition: all 0.3s ease;
-    contain: layout size;
+}
+
+.service-card:hover .icon-container {
+    transform: rotate(0deg) scale(1.05);
+}
+
+.service-card i {
+    font-size: 2.5rem;
+    color: var(--light-color);
+    transform: rotate(5deg);
+    transition: all 0.3s ease;
+}
+
+.service-card:hover i {
+    transform: rotate(0deg);
+}
+
+.service-card p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-top: 1rem;
+    color: var(--text-color);
+    flex-grow: 1;
+    position: relative;
+    z-index: 2;
+}
+
+/* Add emphasis to key phrases */
+.service-card p .emphasis {
+    color: var(--accent-color);
+    font-weight: 600;
+    display: inline-block;
+    position: relative;
+    z-index: 2;
+}
+
+/* Optional: Add a subtle underline effect on hover */
+.service-card p .emphasis:hover {
+    color: var(--hover-accent);
+}
+
+/* Service cards grid layout */
+@media (min-width: 768px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2.5rem;
+    }
+}
+
+/* Contact form */
+.contact-content {
+    background: var(--light-color);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Update form input and textarea placeholders */
+input::placeholder,
+textarea::placeholder,
+input::-moz-placeholder,
+textarea::-moz-placeholder,
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder,
+input::-ms-input-placeholder,
+textarea::-ms-input-placeholder {
+    font-family: 'Roboto', sans-serif;
+    color: var(--placeholder-color);
+    font-size: 1rem;
+    opacity: 1; /* Ensures consistent opacity across browsers */
+}
+
+/* Form elements base styles */
+input, textarea {
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    color: var(--text-color);
+    background: var(--light-color);
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+}
+
+textarea {
+    min-height: 150px;
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+    .mobile-menu-btn {
+        display: none;
+    }
+
+    .nav-links {
+        display: flex;
+        position: static;
+        width: auto;
+        padding: 0;
+    }
+
+    .nav-links li {
+        margin: 0 1rem;
+    }
+
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2.5rem;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr); /* Keep 2 columns for better readability */
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+}
+
+/* Add CTA section styles */
+.cta-section {
+    background: linear-gradient(rgba(30, 61, 89, 0.95), rgba(30, 61, 89, 0.95)), url('images/plastering-hero.webp');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--light-color);
+    text-align: center;
+    padding: 5rem 1rem;
+}
+
+@supports not (background-image: url('images/plastering-hero.webp')) {
+    .cta-section {
+        background-image: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url('images/plastering-hero.jpg');
+    }
+}
+
+.cta-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+}
+
+.cta-section h2 strong {
+    color: var(--light-color);
+    font-weight: 800;
+    font-size: 1.1em;
+    display: inline-block;
+    position: relative;
+}
+
+.cta-section h2 strong::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--light-color);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.cta-section h2:hover strong::after {
+    transform: scaleX(1);
+}
+
+.cta-section p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+/* Add container class */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Add focus styles for accessibility */
+.cta-button:focus,
+input:focus,
+textarea:focus {
+    outline: 3px solid #ffffff;
+    outline-offset: 2px;
+}
+
+/* Update about section styles */
+#about {
+    background: var(--light-color);
+    padding: 6rem 1rem;
+}
+
+.about-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.about-text {
+    background: #fff;
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.about-text h3 {
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    color: var(--dark-color);
+    line-height: 1.3;
+}
+
+.about-text p {
+    margin-bottom: 1.8rem;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    line-height: 1.8;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.about-text h4 {
+    font-size: 1.6rem;
+    color: var(--dark-color);
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid var(--light-color);
+}
+
+/* Add highlight for key points */
+.about-text .highlight {
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+/* Remove the old bullet point list styles */
+.about-content ul {
+    list-style: none;
+}
+
+.about-content li {
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+/* Add smooth scrolling behavior to html */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Add scroll-margin-top to sections to account for fixed navbar */
+section {
+    scroll-margin-top: 80px; /* Adjust this value based on your navbar height */
+}
+
+/* Add ID for top of page */
+#top {
+    scroll-margin-top: 0;
+}
+
+/* Update all other CTA buttons to match */
+.cta-button {
+    font-size: 1.1rem;
+    padding: 0.8rem 2.5rem;
+    border-radius: 50px;
+    background: var(--accent-color);
+    color: var(--light-color);
+    border: none;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
     cursor: pointer;
 }
 
@@ -132,32 +642,503 @@ section {
     box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3);
 }
 
-/* Images */
-img {
-    width: 100%;
-    height: auto;
-    aspect-ratio: attr(width) / attr(height);
+/* Gallery Section */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.gallery-item {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+}
+
+.gallery-image {
+    position: relative;
+    padding-top: 75%; /* 4:3 Aspect Ratio */
+    background-color: var(--secondary-color);
     contain: layout paint;
-    transform: translateZ(0);
 }
 
-/* Form elements */
-input,
-textarea {
+.gallery-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    padding: 0.8rem;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    font-family: inherit;
-    font-size: 1rem;
-    height: 48px;
-    contain: layout size;
+    height: 100%;
+    object-fit: cover;
 }
 
-textarea {
-    height: 150px;
-    min-height: 150px;
-    resize: vertical;
+.gallery-caption {
+    padding: 1.5rem;
+}
+
+.gallery-caption h3 {
+    color: var(--dark-color);
+    margin-bottom: 0.5rem;
+}
+
+.gallery-caption p {
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+/* Trust Badges */
+.trust-badges {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+}
+
+.badge {
+    text-align: center;
+    padding: 1rem;
+}
+
+.badge i {
+    font-size: 2rem;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+}
+
+/* Enhanced CTA Section */
+.cta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 2rem;
+    min-height: 60px; /* Reserve space for buttons */
+    contain: layout paint;
+}
+
+.cta-button {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.cta-divider {
+    color: #fff;
+    font-size: 1.1rem;
+    margin: 0 0.5rem;
+    opacity: 0.8;
+}
+
+.cta-secondary {
+    background: transparent;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cta-secondary:hover {
+    background: var(--accent-color);
+    color: var(--light-color);
+}
+
+.testimonial {
+    max-width: 600px;
+    margin: 3rem auto 0;
+    text-align: center;
+}
+
+.testimonial .quote {
+    font-size: 1.1rem;
+    font-style: italic;
+    margin-bottom: 1rem;
+    color: var(--light-color);
+}
+
+.testimonial .author {
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cta-buttons {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .cta-button {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Update mobile menu styles */
+@media (max-width: 767px) {
+    .nav-links.active {
+        background: var(--dark-color);
+        padding: 1rem;
+    }
+}
+
+/* Update responsive styles */
+@media (max-width: 768px) {
+    .cta-buttons {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .cta-divider {
+        margin: 0.5rem 0;
+    }
+
+    .cta-button {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Update contact info styles */
+.contact-info {
+    text-align: center;
+    padding: 2rem;
+    background: var(--light-color);
+    border-radius: 8px;
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three equal columns */
+    gap: 1.5rem;
+}
+
+/* Style for standard contact items */
+.contact-info .phone,
+.contact-info .email,
+.contact-info .availability {
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0;
+    white-space: nowrap;
+}
+
+/* Full width for area text */
+.contact-info .area {
+    grid-column: 1 / -1; /* Span all columns */
+    max-width: 800px;
+    line-height: 1.6;
+    margin: 0.5rem auto 0;
+    padding: 1rem 0 0;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    white-space: normal;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .contact-info {
+        grid-template-columns: 1fr; /* Stack vertically on mobile */
+        gap: 1rem;
+    }
+
+    .contact-info .phone,
+    .contact-info .email,
+    .contact-info .availability {
+        justify-content: center;
+    }
+}
+
+/* Placeholder styles for gallery images */
+.placeholder-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #fff;
+    transition: opacity 0.3s ease;
+}
+
+.placeholder-image.before {
+    background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+}
+
+.placeholder-image.after {
+    background: linear-gradient(45deg, var(--accent-color), var(--hover-accent));
+    opacity: 0;
+}
+
+.gallery-item:hover .placeholder-image.before {
+    opacity: 0;
+}
+
+.gallery-item:hover .placeholder-image.after {
+    opacity: 1;
+}
+
+.placeholder-image span {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0.5rem 2rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--light-color);
+}
+
+/* Hide decorative icons from screen readers */
+.fas {
+    aria-hidden="true";
+}
+
+/* Remove any unused CSS classes and consolidate similar styles */
+/* For example, combine similar button styles */
+.cta-button,
+.submit-button {
+    /* Shared button styles */
+    padding: 0.75rem 1rem;
+    border-radius: 50px;
+    /* ... other common styles ... */
+}
+
+/* Remove any conflicting styles from other button classes */
+.cta-buttons a.cta-button {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Base button styles - this will be the single source of truth for all buttons */
+.cta-button {
+    /* Layout */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 0.75rem 2rem;
+
+    /* Typography */
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: none;
+    white-space: nowrap;
+
+    /* Appearance */
+    background: var(--accent-color);
+    color: var(--light-color);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+
+    /* Animation */
+    transition: all 0.3s ease;
+}
+
+/* Button hover state */
+.cta-button:hover {
+    background: var(--hover-accent);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3);
+}
+
+/* Secondary button variant */
+.cta-secondary {
+    background: transparent;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+}
+
+.cta-secondary:hover {
+    background: var(--accent-color);
+    color: var(--light-color);
+}
+
+/* Hero section button modifications */
+#hero .cta-button {
+    font-size: 1.2rem;
+    min-height: 54px;
+}
+
+/* Button container styles */
+.cta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 2rem;
+    min-height: 60px;
+}
+
+/* Button divider */
+.cta-divider {
+    color: #fff;
+    font-size: 1.1rem;
+    margin: 0 0.5rem;
+    opacity: 0.8;
+}
+
+/* Responsive styles */
+@media (min-width: 768px) {
+    .cta-buttons {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .cta-button {
+        font-size: 1rem;
+        padding: 1rem 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .cta-buttons {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .cta-divider {
+        margin: 0.5rem 0;
+    }
+}
+/* Update service areas text in hero section */
+.service-areas {
+    color: var(--light-color);
+    margin-top: 3rem; /* Increase spacing from buttons */
+    font-size: 1.1rem;
+    opacity: 0.9; /* Slightly softer white */
+    line-height: 1.6;
+}
+
+/* Adjust spacing on mobile */
+@media (max-width: 768px) {
+    .service-areas {
+        margin-top: 2rem; /* Slightly less spacing on mobile */
+        font-size: 1rem;
+    }
+}
+
+/* WhatsApp Widget */
+.whatsapp-widget {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 999;
+    width: 60px;
+    height: 60px;
+    contain: layout paint;
+}
+
+.whatsapp-button {
+    background-color: #25D366;
+    color: var(--light-color);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    transition: all 0.3s ease;
+}
+
+.whatsapp-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
+}
+
+.whatsapp-button i {
+    font-size: 2rem;
+}
+
+/* Add tooltip */
+.whatsapp-button::before {
+    content: 'Chat with us on WhatsApp';
+    position: absolute;
+    right: 70px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--dark-color);
+    color: var(--light-color);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.whatsapp-button:hover::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .whatsapp-widget {
+        bottom: 1.5rem;
+        right: 1.5rem;
+    }
+
+    .whatsapp-button {
+        width: 50px;
+        height: 50px;
+    }
+
+    .whatsapp-button i {
+        font-size: 1.75rem;
+    }
+
+    .whatsapp-button::before {
+        display: none; /* Hide tooltip on mobile */
+    }
+}
+
+/* Prevent layout shifts */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 /* Optimize font loading */
@@ -166,26 +1147,15 @@ textarea {
     font-display: swap;
 }
 
-/* Content visibility */
+/* Use passive loading for non-critical images */
+.gallery-image img {
+    loading: lazy;
+}
+
+/* Add content-visibility for off-screen content */
 #services,
 #gallery,
 #contact {
     content-visibility: auto;
     contain-intrinsic-size: 700px;
-}
-
-/* Media queries */
-@media (max-width: 768px) {
-    .navbar {
-        padding: 0.5rem;
-    }
-
-    .logo {
-        font-size: 1.5rem;
-    }
-
-    .cta-button {
-        font-size: 0.9rem;
-        padding: 0 1rem;
-    }
 }
