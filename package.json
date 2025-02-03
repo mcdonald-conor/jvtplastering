@@ -1,0 +1,25 @@
+{
+  "name": "plastering",
+  "version": "1.0.0",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcdonald-conor/plastering.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mcdonald-conor/plastering/issues"
+  },
+  "homepage": "https://github.com/mcdonald-conor/plastering#readme",
+  "description": "",
+  "devDependencies": {
+    "cssnano": "^7.0.6",
+    "postcss": "^8.5.1",
+    "postcss-cli": "^11.0.0"
+  }
+}
