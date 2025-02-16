@@ -44,9 +44,16 @@
     </style>
 
     <!-- Preload critical resources -->
-    <link rel="preload" href="css/styles.css" as="style">
+    <link rel="preload" href="styles.css" as="style">
     <link rel="preload" href="images/plastering-hero.webp" as="image" type="image/webp" fetchpriority="high">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" as="style">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap">
+
+    <!-- Scripts -->
+    <script src="js/script.js" defer></script>
 
     <!-- Async CSS loading -->
     <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
@@ -86,9 +93,6 @@
     <meta name="format-detection" content="telephone=yes">
     <meta name="geo.region" content="GB-MER">
     <meta name="geo.placename" content="Liverpool">
-
-    <!-- Defer non-critical JavaScript -->
-    <script src="js/script.js" defer></script>
 </head>
 <body>
     <header>
@@ -310,7 +314,6 @@
         </a>
     </div>
     <script src="js/script.js" defer></script>
-    <script src="https://kit.fontawesome.com/your-kit-code.js" defer crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
     <script>
     function validateContactForm() {

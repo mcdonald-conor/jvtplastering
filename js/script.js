@@ -31,93 +31,96 @@ document.addEventListener('DOMContentLoaded', () => {
     sections.forEach(section => observer.observe(section));
 });
 
-// Optimize scroll performance
-let scrollTimeout;
-window.addEventListener('scroll', () => {
-    if (!scrollTimeout) {
-        scrollTimeout = setTimeout(() => {
-            scrollTimeout = null;
-            // Handle navbar background
-            const navbar = document.querySelector('.navbar');
-            if (navbar) {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
-            }
-        }, 50);
-    }
-}, { passive: true });
-
 document.addEventListener('DOMContentLoaded', function() {
-  const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-  const navLinks = document.querySelector('.nav-links');
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    const navbar = document.querySelector('.navbar');
 
-  mobileMenuBtn.addEventListener('click', function() {
-      navLinks.classList.toggle('active');
-  });
+    // Handle scroll performance and navbar background
+    let scrollTimeout = null;
+    window.addEventListener('scroll', () => {
+        if (!scrollTimeout) {
+            scrollTimeout = setTimeout(() => {
+                scrollTimeout = null;
+                if (navbar) {
+                    if (window.scrollY > 50) {
+                        navbar.classList.add('scrolled');
+                    } else {
+                        navbar.classList.remove('scrolled');
+                    }
+                }
+            }, 50);
+        }
+    }, { passive: true });
 
-  // Close mobile menu when clicking a link
-  document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => {
-          navLinks.classList.remove('active');
-      });
-  });
+    if (mobileMenuBtn && navLinks) {
+        mobileMenuBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.classList.toggle('active');
+        });
 
-  // Handle contact form submission
-  const contactForm = document.getElementById('contact-form');
-  if (contactForm) {
-      contactForm.addEventListener('submit', async function(e) {
-          e.preventDefault();
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!navbar.contains(e.target)) {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.classList.remove('active');
+            }
+        });
 
-          // Validate that either email or phone is provided
-          const email = contactForm.querySelector('input[name="email"]').value;
-          const phone = contactForm.querySelector('input[name="phone"]').value;
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.classList.remove('active');
+            });
+        });
+    }
 
-          if (!email && !phone) {
-              alert('Please provide either your email or phone number so we can get back to you.');
-              return;
-          }
+    // Handle contact form submission
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
 
-          try {
-              const response = await fetch(contactForm.action, {
-                  method: 'POST',
-                  body: new FormData(contactForm),
-                  headers: {
-                      'Accept': 'application/json'
-                  }
-              });
+            // Validate that either email or phone is provided
+            const email = contactForm.querySelector('input[name="email"]').value;
+            const phone = contactForm.querySelector('input[name="phone"]').value;
 
-              if (response.ok) {
-                  alert('Thank you for your message. We will get back to you soon!');
-                  contactForm.reset();
-              } else {
-                  throw new Error('Form submission failed');
-              }
-          } catch (error) {
-              alert('Sorry, there was a problem sending your message. Please try again or contact us directly.');
-              console.error('Form submission error:', error);
-          }
-      });
-  }
+            if (!email && !phone) {
+                alert('Please provide either your email or phone number so we can get back to you.');
+                return;
+            }
 
-  // Handle navbar background on scroll
-  const navbar = document.querySelector('.navbar');
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: new FormData(contactForm),
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
 
-  window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-          navbar.classList.add('scrolled');
-      } else {
-          navbar.classList.remove('scrolled');
-      }
-  });
+                if (response.ok) {
+                    alert('Thank you for your message. We will get back to you soon!');
+                    contactForm.reset();
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                alert('Sorry, there was a problem sending your message. Please try again or contact us directly.');
+                console.error('Form submission error:', error);
+            }
+        });
+    }
 
-  const hamburger = document.querySelector('.hamburger');
-  const navMenu = document.querySelector('.nav-menu');
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
 
-  hamburger.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
-      hamburger.classList.toggle('active');
-  });
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+    }
 });
