@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JT Plastering | Professional Plastering Services in Liverpool</title>
+    <title>JVT Plastering | Professional Plastering Services in Liverpool</title>
 
     <!-- Critical CSS -->
     <style>
@@ -69,7 +69,7 @@
         <nav class="navbar">
             <div class="logo">
                 <i class="fas fa-paint-roller"></i>
-                JT Plastering
+                JVT Plastering
             </div>
             <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
                 <span class="menu-bar"></span>
@@ -93,7 +93,6 @@
                 <h1>All aspects of <strong>plastering</strong> and <strong>rendering services</strong> in <strong>Liverpool</strong></h1>
                 <div class="cta-buttons">
                     <a href="tel:07957786876" class="cta-button">Call Now: 07957 786 876</a>
-                    <span class="cta-divider">or</span>
                     <a href="#contact" class="cta-button cta-secondary">Message for a Quote</a>
                 </div>
             </div>
@@ -215,7 +214,6 @@
                 <p>Choose how you'd like to get in touch - I'll respond within 24 hours</p>
                 <div class="cta-buttons">
                     <a href="tel:07957786876" class="cta-button flex items-center justify-center">Call Direct: 07957 786 876</a>
-                    <span class="cta-divider">or</span>
                     <a href="#contact" class="cta-button cta-secondary flex items-center justify-center">Send a Message</a>
                 </div>
                 <div class="testimonial" itemscope itemtype="https://schema.org/Review">
@@ -233,25 +231,46 @@
                       action="https://formspree.io/f/xrbekyro"
                       method="POST"
                       enctype="multipart/form-data"
-                      accept-charset="utf-8">
+                      accept-charset="utf-8"
+                      onsubmit="return validateContactForm()">
                     <!-- Anti-spam hidden field -->
-                    <input type="hidden" name="_subject" value="New contact from JT Plastering website">
-                    <input type="text" name="name" placeholder="Your Name" required>
-                    <input type="email" name="email" placeholder="Your Email" required>
-                    <input type="tel"
-                           name="phone"
-                           placeholder="Your Phone"
-                           pattern="[0-9]*"
-                           inputmode="numeric"
-                           autocomplete="tel"
-                           maxlength="11">
+                    <input type="hidden" name="_subject" value="New contact from JVT Plastering website">
 
-                    <textarea name="message" placeholder="Tell me about your project" required></textarea>
-                    <button type="submit" class="cta-button" aria-label="Send contact form message">Send Message</button>
+                    <input type="text"
+                           name="name"
+                           placeholder="Your Name"
+                           required>
+
+                    <div class="contact-options">
+                        <p class="contact-helper">Please provide either your email or phone number (or both if you'd like)</p>
+                        <div class="contact-fields">
+                            <input type="email"
+                                   name="email"
+                                   placeholder="Your Email"
+                                   class="contact-field">
+
+                            <input type="tel"
+                                   name="phone"
+                                   placeholder="Your Phone"
+                                   pattern="[0-9]*"
+                                   inputmode="numeric"
+                                   autocomplete="tel"
+                                   maxlength="11"
+                                   class="contact-field">
+                        </div>
+                    </div>
+
+                    <textarea name="message"
+                             placeholder="Tell me about your project"
+                             required></textarea>
+
+                    <button type="submit"
+                            class="cta-button"
+                            aria-label="Send contact form message">Send Message</button>
                 </form>
                 <div class="contact-info">
                     <p class="phone"><i class="fas fa-phone"></i> 07957 786 876</p>
-                    <p class="email"><i class="fas fa-envelope"></i> info@jtplastering.co.uk</p>
+                    <p class="email"><i class="fas fa-envelope"></i> info@jvtplastering.co.uk</p>
                     <p class="availability"><i class="fas fa-clock"></i> Available 7 days a week</p>
                     <p class="area"><i class="fas fa-map-marker-alt"></i> Serving Liverpool City Centre, Allerton, Aigburth, Mossley Hill, Woolton, Childwall, Wavertree, Crosby, Waterloo, Bootle, Aintree, Walton, Anfield, and all surrounding areas in Merseyside</p>
                 </div>
@@ -271,5 +290,17 @@
     <script src="js/script.js" defer></script>
     <script src="https://kit.fontawesome.com/your-kit-code.js" defer crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+    <script>
+    function validateContactForm() {
+        const email = document.querySelector('input[name="email"]').value;
+        const phone = document.querySelector('input[name="phone"]').value;
+
+        if (!email && !phone) {
+            alert('Please provide either your email or phone number so I can get back to you.');
+            return false;
+        }
+        return true;
+    }
+    </script>
 </body>
 </html>

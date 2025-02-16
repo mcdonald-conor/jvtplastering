@@ -1,14 +1,15 @@
 /* Update color variables at the top */
 :root {
-    --primary-color: #1e3d59; /* Deep navy blue */
-    --secondary-color: #f5f5f5; /* Warm gray */
-    --accent-color: #17a2b8; /* Muted teal */
-    --dark-color: #2d2d2d;
+    --primary-color: #2c3e50; /* Rich navy blue */
+    --secondary-color: #f8f9fa; /* Light gray background */
+    --accent-color: #e67e22; /* Warm orange */
+    --dark-color: #1a252f; /* Darker navy */
     --light-color: #ffffff;
     --text-color: #2d2d2d;
     --border-color: #e1e1e1;
     --placeholder-color: #666666;
-    --hover-accent: #148a9c; /* Darker shade of accent color */
+    --hover-accent: #d35400; /* Darker orange */
+    --gradient-overlay: rgba(44, 62, 80, 0.70); /* Reduced opacity for more vibrant background */
 }
 
 /* Reset and base styles */
@@ -30,7 +31,7 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(30, 61, 89, 0.95); /* Semi-transparent primary color */
+    background: rgba(44, 62, 80, 0.95); /* Semi-transparent primary color */
     padding: 1.5rem;
     z-index: 1000;
     display: flex;
@@ -148,8 +149,8 @@ body {
     width: 100%;
     height: 100%;
     background-image: linear-gradient(
-        rgba(30, 61, 89, 0.75),
-        rgba(30, 61, 89, 0.75)
+        var(--gradient-overlay),
+        var(--gradient-overlay)
     ), url('images/plastering-hero.webp');
     background-size: cover;
     background-position: center;
@@ -167,9 +168,11 @@ body {
     max-width: 1000px;
     margin: 0 auto;
     padding: 2rem 1rem;
-    margin-top: 2rem;
-    min-height: 60vh;
-    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px); /* Account for navbar height */
     width: 100%;
     contain: layout paint;
 }
@@ -203,7 +206,7 @@ body {
     color: #fff;
     font-size: 1.2rem;
     letter-spacing: 2px;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     text-transform: uppercase;
     font-weight: 400;
 }
@@ -212,9 +215,10 @@ body {
     font-size: 3.5rem;
     font-weight: 300;
     line-height: 1.2;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
     color: #fff;
     text-transform: none;
+    max-width: 800px;
 }
 
 .hero-content h1 strong {
@@ -225,30 +229,41 @@ body {
 #hero .cta-button {
     font-size: 1.2rem;
     min-height: 54px;
-    /* Keep other styles but remove any display/alignment properties */
-    background: var(--accent-color);
-    color: var(--light-color);
-    border: none;
-    margin-top: 1rem;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
+    margin: 0; /* Remove margin to help with centering */
+    flex: 0 1 auto; /* Allow buttons to size naturally */
+    min-width: 200px; /* Ensure minimum width for buttons */
 }
 
 #hero .cta-button:hover {
     background: var(--hover-accent);
     transform: translateY(-3px);
-    box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3);
+    box-shadow: 0 4px 15px rgba(230, 126, 34, 0.3);
 }
 
 /* Media queries for hero section */
 @media (max-width: 768px) {
+    .hero-content {
+        padding: 2rem 1rem;
+    }
+
     .hero-content h1 {
         font-size: 2.5rem;
+        margin-bottom: 2rem;
     }
 
     .hero-subtitle {
         font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    #hero .cta-button {
+        width: 100%;
+        max-width: 300px;
     }
 }
 
@@ -480,7 +495,7 @@ textarea {
 
 /* Add CTA section styles */
 .cta-section {
-    background: linear-gradient(rgba(30, 61, 89, 0.95), rgba(30, 61, 89, 0.95)), url('images/plastering-hero.webp');
+    background: linear-gradient(var(--gradient-overlay), var(--gradient-overlay)), url('images/plastering-hero.webp');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -639,7 +654,7 @@ section {
 .cta-button:hover {
     background: var(--hover-accent);
     transform: translateY(-3px);
-    box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3);
+    box-shadow: 0 4px 15px rgba(230, 126, 34, 0.3);
 }
 
 /* Gallery Section */
@@ -717,23 +732,11 @@ section {
 /* Enhanced CTA Section */
 .cta-buttons {
     display: flex;
-    flex-direction: column;
     gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
     width: 100%;
-    max-width: 100%;
-    margin-top: 2rem;
-    min-height: 60px; /* Reserve space for buttons */
-    contain: layout paint;
-}
-
-.cta-button {
-    padding: 0.75rem 1rem;
-    font-size: 0.9rem;
-    white-space: nowrap;
-    text-align: center;
-    width: 100%;
-    max-width: 300px;
-    margin: 0 auto;
 }
 
 .cta-divider {
@@ -746,10 +749,7 @@ section {
 .cta-secondary {
     background: transparent;
     border: 2px solid var(--accent-color);
-    color: var(--accent-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    color: var(--light-color);
 }
 
 .cta-secondary:hover {
@@ -976,14 +976,14 @@ section {
 .cta-button:hover {
     background: var(--hover-accent);
     transform: translateY(-3px);
-    box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3);
+    box-shadow: 0 4px 15px rgba(230, 126, 34, 0.3);
 }
 
 /* Secondary button variant */
 .cta-secondary {
     background: transparent;
     border: 2px solid var(--accent-color);
-    color: var(--accent-color);
+    color: var(--light-color);
 }
 
 .cta-secondary:hover {
@@ -1158,4 +1158,39 @@ img {
 #contact {
     content-visibility: auto;
     contain-intrinsic-size: 700px;
+}
+
+.contact-options {
+    margin-bottom: 1rem;
+}
+
+.contact-helper {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-bottom: 0.5rem;
+    text-align: left;
+}
+
+.contact-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+/* Style for form fields */
+.contact-field {
+    width: 100%;
+}
+
+/* Responsive layout for mobile */
+@media (max-width: 768px) {
+    .contact-fields {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Add subtle visual indication that fields are optional */
+.contact-field::placeholder {
+    opacity: 0.7;
 }
