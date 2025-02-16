@@ -1,21 +1,21 @@
 {
-  "name": "plastering",
+  "name": "jvtplastering",
   "version": "1.0.0",
-  "main": "script.js",
+  "main": "js/script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mcdonald-conor/plastering.git"
+    "url": "git+https://github.com/mcdonald-conor/jvtplastering.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mcdonald-conor/plastering/issues"
+    "url": "https://github.com/mcdonald-conor/jvtplastering/issues"
   },
-  "homepage": "https://github.com/mcdonald-conor/plastering#readme",
+  "homepage": "https://github.com/mcdonald-conor/jvtplastering#readme",
   "description": "",
   "devDependencies": {
     "cssnano": "^7.0.6",

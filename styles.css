@@ -918,10 +918,6 @@ section {
     color: var(--light-color);
 }
 
-/* Hide decorative icons from screen readers */
-.fas {
-    aria-hidden="true";
-}
 
 /* Remove any unused CSS classes and consolidate similar styles */
 /* For example, combine similar button styles */
@@ -1141,16 +1137,7 @@ img {
     display: block;
 }
 
-/* Optimize font loading */
-@font-face {
-    font-family: 'Roboto';
-    font-display: swap;
-}
 
-/* Use passive loading for non-critical images */
-.gallery-image img {
-    loading: lazy;
-}
 
 /* Add content-visibility for off-screen content */
 #services,
