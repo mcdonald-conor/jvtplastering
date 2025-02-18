@@ -56,8 +56,13 @@ document.addEventListener('DOMContentLoaded', function() {
     if (mobileMenuBtn && navLinks) {
         mobileMenuBtn.addEventListener('click', function(e) {
             e.preventDefault();
+            const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+            mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
             navLinks.classList.toggle('active');
             mobileMenuBtn.classList.toggle('active');
+
+            // Prevent body scroll when menu is open
+            document.body.style.overflow = isExpanded ? 'auto' : 'hidden';
         });
 
         // Close mobile menu when clicking outside
@@ -65,6 +70,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!navbar.contains(e.target)) {
                 navLinks.classList.remove('active');
                 mobileMenuBtn.classList.remove('active');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = 'auto';
             }
         });
 
@@ -73,7 +80,19 @@ document.addEventListener('DOMContentLoaded', function() {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
                 mobileMenuBtn.classList.remove('active');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = 'auto';
             });
+        });
+
+        // Handle escape key to close menu
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.classList.remove('active');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = 'auto';
+            }
         });
     }
 
