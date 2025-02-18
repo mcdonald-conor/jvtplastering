@@ -32,78 +32,51 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Mobile menu functionality
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
-    const navbar = document.querySelector('.navbar');
-
-    // Handle scroll performance and navbar background
-    let scrollTimeout = null;
-    window.addEventListener('scroll', () => {
-        if (!scrollTimeout) {
-            scrollTimeout = setTimeout(() => {
-                scrollTimeout = null;
-                if (navbar) {
-                    if (window.scrollY > 50) {
-                        navbar.classList.add('scrolled');
-                    } else {
-                        navbar.classList.remove('scrolled');
-                    }
-                }
-            }, 50);
-        }
-    }, { passive: true });
 
     if (mobileMenuBtn && navLinks) {
-        mobileMenuBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation(); // Prevent event bubbling
-            const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
-            mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
+        mobileMenuBtn.addEventListener('click', function() {
             navLinks.classList.toggle('active');
-            mobileMenuBtn.classList.toggle('active');
-
-            // Prevent body scroll when menu is open
-            document.body.style.overflow = isExpanded ? 'auto' : 'hidden';
         });
 
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(e) {
-            if (navLinks.classList.contains('active') && !navbar.contains(e.target)) {
-                navLinks.classList.remove('active');
-                mobileMenuBtn.classList.remove('active');
-                mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                document.body.style.overflow = 'auto';
-            }
-        });
-
-        // Close mobile menu when clicking a link
+        // Close menu when clicking a link
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
-                mobileMenuBtn.classList.remove('active');
-                mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                document.body.style.overflow = 'auto';
             });
         });
 
-        // Handle escape key to close menu
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!mobileMenuBtn.contains(e.target) && !navLinks.contains(e.target)) {
                 navLinks.classList.remove('active');
-                mobileMenuBtn.classList.remove('active');
-                mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                document.body.style.overflow = 'auto';
             }
         });
     }
 
-    // Handle contact form submission
+    // Load hero background
+    const hero = document.getElementById('hero');
+    if (hero) {
+        setTimeout(() => {
+            hero.classList.add('loaded');
+        }, 100);
+    }
+
+    // Handle lazy loading
+    if ('loading' in HTMLImageElement.prototype) {
+        const images = document.querySelectorAll('img[loading="lazy"]');
+        images.forEach(img => {
+            img.src = img.dataset.src;
+        });
+    }
+
+    // Contact form handling
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-
-            // Validate that either email or phone is provided
             const email = contactForm.querySelector('input[name="email"]').value;
             const phone = contactForm.querySelector('input[name="phone"]').value;
 
@@ -132,13 +105,5 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Form submission error:', error);
             }
         });
-    }
-
-    // Remove conflicting hamburger menu code
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
-
-    if (hamburger && navMenu) {
-        hamburger.removeEventListener('click', () => {});
     }
 });

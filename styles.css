@@ -31,7 +31,7 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(44, 62, 80, 0.95); /* Semi-transparent primary color */
+    background: rgba(44, 62, 80, 0.95);
     padding: 1.5rem;
     z-index: 1000;
     display: flex;
@@ -41,20 +41,6 @@ body {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     min-height: 70px;
-    height: auto;
-    contain: layout paint;
-}
-
-/* Add a class for when navbar should have background (on scroll) */
-.navbar.scrolled {
-    background: var(--primary-color);
-    padding: 1rem;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-}
-
-.navbar.scrolled .logo,
-.navbar.scrolled .nav-links a {
-    text-shadow: none;
 }
 
 .logo {
@@ -65,6 +51,7 @@ body {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    text-decoration: none;
 }
 
 .logo i {
@@ -74,19 +61,38 @@ body {
     font-size: 1.6rem;
 }
 
-.navbar:hover .logo i {
-    transform: rotate(0deg);
+/* Hide the navigation links by default */
+.nav-links {
+    display: none;
 }
 
+/* Style navigation menu links */
+.nav-links a {
+    color: var(--light-color);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 14px 16px;
+    display: block;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--accent-color);
+}
+
+/* Style the hamburger menu */
 .mobile-menu-btn {
     display: none;
     background: none;
     border: none;
     cursor: pointer;
     padding: 10px;
-    z-index: 1001;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
 }
 
+/* Mobile styles */
 @media (max-width: 767px) {
     .mobile-menu-btn {
         display: block;
@@ -98,86 +104,58 @@ body {
         width: 25px;
         margin: 5px 0;
         display: block;
-        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-    }
-
-    .mobile-menu-btn.active .menu-bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
-    }
-
-    .mobile-menu-btn.active .menu-bar:nth-child(2) {
-        opacity: 0;
-    }
-
-    .mobile-menu-btn.active .menu-bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
+        transition: 0.3s;
     }
 
     .nav-links {
         display: none;
         position: fixed;
+        width: 100%;
+        background-color: var(--primary-color);
         top: 70px;
         left: 0;
-        right: 0;
-        background: var(--primary-color);
-        padding: 1rem;
+        padding: 1rem 0;
         box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        z-index: 999;
-        flex-direction: column;
-        align-items: center;
     }
 
     .nav-links.active {
-        display: flex;
-        animation: slideDown 0.3s ease-in-out forwards;
-    }
-
-    @keyframes slideDown {
-        from {
-            opacity: 0;
-            transform: translateY(-10px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        display: block;
     }
 
     .nav-links li {
-        margin: 1rem 0;
-        width: 100%;
         text-align: center;
+        margin: 0;
+        padding: 0;
     }
 
     .nav-links a {
-        display: block;
-        padding: 0.5rem 0;
+        padding: 1rem;
         font-size: 1.1rem;
+    }
+
+    .nav-links a:hover {
+        background-color: rgba(255,255,255,0.1);
     }
 }
 
-.nav-links {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-}
+/* Desktop styles */
+@media (min-width: 768px) {
+    .nav-links {
+        display: flex;
+        position: static;
+        width: auto;
+        background: none;
+        padding: 0;
+    }
 
-.nav-links li {
-    margin: 0 1rem;
-}
+    .nav-links li {
+        margin: 0 1rem;
+        display: inline-block;
+    }
 
-.nav-links a {
-    color: var(--light-color);
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-}
-
-.nav-links a:hover {
-    color: var(--accent-color);
+    .nav-links a {
+        padding: 0;
+    }
 }
 
 /* Hero section */
