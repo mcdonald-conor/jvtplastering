@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (mobileMenuBtn && navLinks) {
         mobileMenuBtn.addEventListener('click', function(e) {
             e.preventDefault();
+            e.stopPropagation(); // Prevent event bubbling
             const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
             mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
             navLinks.classList.toggle('active');
@@ -67,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Close mobile menu when clicking outside
         document.addEventListener('click', function(e) {
-            if (!navbar.contains(e.target)) {
+            if (navLinks.classList.contains('active') && !navbar.contains(e.target)) {
                 navLinks.classList.remove('active');
                 mobileMenuBtn.classList.remove('active');
                 mobileMenuBtn.setAttribute('aria-expanded', 'false');
@@ -133,13 +134,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Remove conflicting hamburger menu code
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
 
     if (hamburger && navMenu) {
-        hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            hamburger.classList.toggle('active');
-        });
+        hamburger.removeEventListener('click', () => {});
     }
 });
