@@ -32,12 +32,11 @@ body {
     top: 0;
     width: 100%;
     background: rgba(44, 62, 80, 0.95);
-    padding: 1.5rem;
     z-index: 1000;
     transition: all 0.3s ease;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    min-height: 70px;
+    padding: 1rem;
 }
 
 .navbar-brand.logo {
@@ -49,8 +48,6 @@ body {
     align-items: center;
     gap: 0.5rem;
     text-decoration: none;
-    padding: 0;
-    margin: 0;
 }
 
 .logo i {
@@ -60,11 +57,11 @@ body {
     font-size: 1.6rem;
 }
 
-/* Bootstrap navbar overrides */
+/* Clean navbar styles */
 .navbar-toggler {
-    padding: 0;
+    padding: 0.5rem;
     border: none;
-    margin-right: 1rem;
+    background: transparent;
 }
 
 .navbar-toggler:focus {
@@ -78,30 +75,29 @@ body {
 
 .nav-link {
     color: var(--light-color) !important;
-    font-weight: 500 !important;
-    padding: 0.5rem 1rem !important;
-    transition: color 0.3s !important;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s;
 }
 
 .nav-link:hover {
     color: var(--accent-color) !important;
 }
 
+/* Mobile menu styles */
 @media (max-width: 767.98px) {
     .navbar-collapse {
         background: var(--primary-color);
-        margin: 1rem -1.5rem -1.5rem;
-        padding: 1rem;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         position: absolute;
         top: 100%;
         left: 0;
         right: 0;
-        transition: all 0.3s ease-in-out;
+        padding: 1rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
 
     .nav-link {
-        padding: 0.75rem 1rem !important;
+        padding: 0.75rem 1rem;
         border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 
@@ -110,19 +106,23 @@ body {
     }
 }
 
+/* Desktop menu styles */
 @media (min-width: 768px) {
     .navbar-nav {
         gap: 1rem;
     }
 
     .nav-link {
-        padding: 0 !important;
+        padding: 0.5rem 1rem;
     }
 }
 
-/* Remove old mobile menu styles */
-.nav-menu.active {
-    display: none;
+/* Remove all old/conflicting navbar styles */
+.nav-menu.active,
+.nav-links.active,
+.mobile-menu-btn,
+.menu-bar {
+    display: none !important;
 }
 
 /* Desktop styles */
@@ -821,8 +821,7 @@ section {
 /* Update mobile menu styles */
 @media (max-width: 767px) {
     .nav-links.active {
-        background: var(--dark-color);
-        padding: 1rem;
+        display: none;
     }
 }
 
@@ -937,7 +936,6 @@ section {
     letter-spacing: 2px;
     color: var(--light-color);
 }
-
 
 /* Remove any unused CSS classes and consolidate similar styles */
 /* For example, combine similar button styles */
@@ -1156,8 +1154,6 @@ img {
     height: auto;
     display: block;
 }
-
-
 
 /* Add content-visibility for off-screen content */
 #services,
