@@ -34,16 +34,13 @@ body {
     background: rgba(44, 62, 80, 0.95);
     padding: 1.5rem;
     z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     transition: all 0.3s ease;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     min-height: 70px;
 }
 
-.logo {
+.navbar-brand.logo {
     color: var(--light-color);
     font-size: 1.8rem;
     font-weight: 800;
@@ -52,6 +49,8 @@ body {
     align-items: center;
     gap: 0.5rem;
     text-decoration: none;
+    padding: 0;
+    margin: 0;
 }
 
 .logo i {
@@ -61,81 +60,69 @@ body {
     font-size: 1.6rem;
 }
 
-/* Hide the navigation links by default */
-.nav-links {
-    display: none;
-}
-
-/* Style navigation menu links */
-.nav-links a {
-    color: var(--light-color);
-    text-decoration: none;
-    font-weight: 500;
-    padding: 14px 16px;
-    display: block;
-    transition: color 0.3s;
-}
-
-.nav-links a:hover {
-    color: var(--accent-color);
-}
-
-/* Style the hamburger menu */
-.mobile-menu-btn {
-    display: none;
-    background: none;
+/* Bootstrap navbar overrides */
+.navbar-toggler {
+    padding: 0;
     border: none;
-    cursor: pointer;
-    padding: 10px;
-    position: absolute;
-    right: 1rem;
-    top: 1rem;
+    margin-right: 1rem;
 }
 
-/* Mobile styles */
-@media (max-width: 767px) {
-    .mobile-menu-btn {
-        display: block;
-    }
+.navbar-toggler:focus {
+    box-shadow: none;
+    outline: none;
+}
 
-    .mobile-menu-btn .menu-bar {
-        background: var(--light-color);
-        height: 3px;
-        width: 25px;
-        margin: 5px 0;
-        display: block;
-        transition: 0.3s;
-    }
+.mobile-menu-btn .menu-bar {
+    background: var(--light-color);
+    height: 3px;
+    width: 25px;
+    margin: 5px 0;
+    display: block;
+    transition: 0.3s;
+}
 
-    .nav-links {
-        display: none;
-        position: fixed;
-        width: 100%;
-        background-color: var(--primary-color);
-        top: 70px;
-        left: 0;
-        padding: 1rem 0;
+.nav-link {
+    color: var(--light-color) !important;
+    font-weight: 500 !important;
+    padding: 0.5rem 1rem !important;
+    transition: color 0.3s !important;
+}
+
+.nav-link:hover {
+    color: var(--accent-color) !important;
+}
+
+@media (max-width: 767.98px) {
+    .navbar-collapse {
+        background: var(--primary-color);
+        margin: 1rem -1.5rem -1.5rem;
+        padding: 1rem;
         box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
 
-    .nav-links.active {
-        display: block;
-    }
-
-    .nav-links li {
+    .nav-link {
         text-align: center;
-        margin: 0;
-        padding: 0;
+        padding: 0.75rem !important;
     }
 
-    .nav-links a {
-        padding: 1rem;
-        font-size: 1.1rem;
-    }
-
-    .nav-links a:hover {
+    .nav-link:hover {
         background-color: rgba(255,255,255,0.1);
     }
+}
+
+@media (min-width: 768px) {
+    .navbar-nav {
+        gap: 1rem;
+    }
+
+    .nav-link {
+        padding: 0 !important;
+    }
+}
+
+/* Remove old mobile menu styles */
+.nav-menu.active {
+    display: none;
 }
 
 /* Desktop styles */

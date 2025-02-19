@@ -32,30 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Mobile menu functionality
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const navLinks = document.querySelector('.nav-links');
-
-    if (mobileMenuBtn && navLinks) {
-        mobileMenuBtn.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
-        });
-
-        // Close menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-            });
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!mobileMenuBtn.contains(e.target) && !navLinks.contains(e.target)) {
-                navLinks.classList.remove('active');
-            }
-        });
-    }
-
     // Load hero background
     const hero = document.getElementById('hero');
     if (hero) {
@@ -71,6 +47,30 @@ document.addEventListener('DOMContentLoaded', function() {
             img.src = img.dataset.src;
         });
     }
+
+    // Use Intersection Observer for content visibility
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.contentVisibility = 'visible';
+                observer.unobserve(entry.target);
+            }
+        });
+    });
+
+    // Observe sections
+    const sections = document.querySelectorAll('#services, #gallery, #contact');
+    sections.forEach(section => observer.observe(section));
+
+    // Auto-close mobile menu when clicking nav links
+    document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+            if (navbarCollapse.classList.contains('show')) {
+                bootstrap.Collapse.getInstance(navbarCollapse).hide();
+            }
+        });
+    });
 
     // Contact form handling
     const contactForm = document.getElementById('contact-form');
