@@ -170,6 +170,48 @@ body {
     height: 100%;
     object-fit: cover;
     z-index: -2;
+    transform: scale(1.01); /* Prevents white edges during video playback */
+    will-change: transform; /* Optimizes performance by creating a new layer */
+    backface-visibility: hidden; /* Reduces flickering */
+    background: var(--primary-color); /* Fallback color while video loads */
+}
+
+/* Video loading optimization */
+.hero-video {
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Optimize video performance on mobile */
+@media (max-width: 768px) {
+    .hero-video {
+        background-size: cover;
+        background-position: center;
+    }
+}
+
+/* Reduce motion if user prefers */
+@media (prefers-reduced-motion: reduce) {
+    .hero-video {
+        display: none;
+    }
+    #hero {
+        background-size: cover;
+        background-position: center;
+    }
+}
+
+/* Add blur-up loading effect */
+.hero-video.loading {
+    filter: blur(20px);
+    transform: scale(1.1);
+}
+
+.hero-video.loaded {
+    filter: blur(0);
+    transform: scale(1.01);
+    transition: filter 0.5s ease, transform 0.5s ease;
 }
 
 /* Add overlay to ensure text readability */

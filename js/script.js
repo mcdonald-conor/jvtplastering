@@ -73,4 +73,71 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Video loading optimization
+    const video = document.querySelector('.hero-video');
+    if (!video) return;
+
+    // Add loading class initially
+    video.classList.add('loading');
+
+    // Function to handle video loading
+    function handleVideoLoad() {
+        // Remove loading class and add loaded class for smooth transition
+        video.classList.remove('loading');
+        video.classList.add('loaded');
+    }
+
+    // Check if video is already loaded
+    if (video.readyState >= 3) {
+        handleVideoLoad();
+    } else {
+        // Listen for when video can play through
+        video.addEventListener('canplaythrough', handleVideoLoad);
+    }
+
+    // Handle mobile devices and slow connections
+    function checkConnection() {
+        if (navigator.connection) {
+            const connection = navigator.connection;
+
+            // If on slow connection or mobile data, pause video
+            if (connection.saveData ||
+                connection.effectiveType === 'slow-2g' ||
+                connection.effectiveType === '2g' ||
+                connection.effectiveType === '3g') {
+                video.pause();
+                video.removeAttribute('autoplay');
+                video.preload = 'none';
+                video.style.display = 'none';
+            }
+        }
+    }
+
+    // Check connection when available
+    if ('connection' in navigator) {
+        checkConnection();
+        navigator.connection.addEventListener('change', checkConnection);
+    }
+
+    // Intersection Observer for lazy loading
+    const videoObserver = new IntersectionObserver(
+        (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Only load video when in viewport
+                    if (video.preload === 'none') {
+                        video.preload = 'metadata';
+                    }
+                    videoObserver.unobserve(video);
+                }
+            });
+        },
+        {
+            rootMargin: '50px 0px',
+            threshold: 0.1
+        }
+    );
+
+    videoObserver.observe(video);
 });
