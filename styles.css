@@ -730,19 +730,14 @@ section {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
 .gallery-item {
     background: var(--light-color);
-    border-radius: 10px;
+    border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+    transition: transform 0.3s ease;
 }
 
 .gallery-item:hover {
@@ -751,9 +746,9 @@ section {
 
 .gallery-image {
     position: relative;
-    padding-top: 75%; /* 4:3 aspect ratio */
+    padding-top: 75%; /* 4:3 Aspect Ratio */
     overflow: hidden;
-    background: var(--secondary-color);
+    cursor: pointer;
 }
 
 .gallery-image img {
@@ -766,9 +761,9 @@ section {
     transition: opacity 0.5s ease;
 }
 
-/* Hide after images by default */
-.gallery-image .after-image {
-    opacity: 0;
+/* Single image (ceiling repair) */
+.gallery-image .single-image {
+    opacity: 1;
 }
 
 /* Automatic rotation for before/after images */
@@ -796,26 +791,25 @@ section {
     }
 }
 
-/* Apply rotation animation to first two gallery items */
+/* Apply rotation animation to first and third gallery items */
 .gallery-item:nth-child(1) .gallery-image .before-image,
-.gallery-item:nth-child(2) .gallery-image .before-image {
+.gallery-item:nth-child(3) .gallery-image .before-image {
     animation: imageRotation 6s infinite;
 }
 
 .gallery-item:nth-child(1) .gallery-image .after-image,
-.gallery-item:nth-child(2) .gallery-image .after-image {
+.gallery-item:nth-child(3) .gallery-image .after-image {
     animation: imageRotationReverse 6s infinite;
 }
 
 /* Keep single images visible */
-.gallery-item:nth-child(3) .gallery-image img,
-.gallery-item:nth-child(4) .gallery-image img {
+.gallery-item:nth-child(2) .gallery-image img {
     opacity: 1;
 }
 
 /* Pause animation on hover */
 .gallery-item:nth-child(1):hover .gallery-image img,
-.gallery-item:nth-child(2):hover .gallery-image img {
+.gallery-item:nth-child(3):hover .gallery-image img {
     animation-play-state: paused;
 }
 
