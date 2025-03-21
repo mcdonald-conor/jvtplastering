@@ -169,7 +169,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: -1;
+    z-index: -2;
 }
 
 /* Add overlay to ensure text readability */
@@ -180,7 +180,10 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--gradient-overlay);
+    background-image: linear-gradient(
+        var(--gradient-overlay),
+        var(--gradient-overlay)
+    );
     z-index: -1;
 }
 
@@ -517,7 +520,7 @@ textarea {
 
 /* Add CTA section styles */
 .cta-section {
-    background: linear-gradient(var(--gradient-overlay), var(--gradient-overlay)), url('images/plastering-hero.webp');
+    background: linear-gradient(var(--gradient-overlay), var(--gradient-overlay)), url('images/bottom_hero.jpeg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -526,9 +529,9 @@ textarea {
     padding: 5rem 1rem;
 }
 
-@supports not (background-image: url('images/plastering-hero.webp')) {
+@supports not (background-image: url('images/bottom_hero.jpeg')) {
     .cta-section {
-        background-image: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url('images/plastering-hero.jpg');
+        background-image: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url('images/bottom_hero.jpeg');
     }
 }
 
