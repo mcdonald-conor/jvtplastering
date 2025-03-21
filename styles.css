@@ -704,6 +704,7 @@ section {
     padding-top: 75%; /* 4:3 Aspect Ratio */
     background-color: var(--secondary-color);
     contain: layout paint;
+    overflow: hidden;
 }
 
 .gallery-image img {
@@ -713,6 +714,19 @@ section {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: opacity 0.5s ease;
+}
+
+.gallery-image .after-image {
+    opacity: 0;
+}
+
+.gallery-item:hover .gallery-image .before-image {
+    opacity: 0;
+}
+
+.gallery-item:hover .gallery-image .after-image {
+    opacity: 1;
 }
 
 .gallery-caption {
