@@ -722,21 +722,52 @@ section {
     opacity: 0;
 }
 
-/* Show after images on hover for specific items */
-.gallery-item:nth-child(1):hover .gallery-image .before-image,
-.gallery-item:nth-child(2):hover .gallery-image .before-image {
-    opacity: 0;
+/* Automatic rotation for before/after images */
+@keyframes imageRotation {
+    0%, 45% {
+        opacity: 1;
+    }
+    50%, 95% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
-.gallery-item:nth-child(1):hover .gallery-image .after-image,
-.gallery-item:nth-child(2):hover .gallery-image .after-image {
-    opacity: 1;
+@keyframes imageRotationReverse {
+    0%, 45% {
+        opacity: 0;
+    }
+    50%, 95% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Apply rotation animation to first two gallery items */
+.gallery-item:nth-child(1) .gallery-image .before-image,
+.gallery-item:nth-child(2) .gallery-image .before-image {
+    animation: imageRotation 6s infinite;
+}
+
+.gallery-item:nth-child(1) .gallery-image .after-image,
+.gallery-item:nth-child(2) .gallery-image .after-image {
+    animation: imageRotationReverse 6s infinite;
 }
 
 /* Keep single images visible */
 .gallery-item:nth-child(3) .gallery-image img,
 .gallery-item:nth-child(4) .gallery-image img {
     opacity: 1;
+}
+
+/* Pause animation on hover */
+.gallery-item:nth-child(1):hover .gallery-image img,
+.gallery-item:nth-child(2):hover .gallery-image img {
+    animation-play-state: paused;
 }
 
 .gallery-caption {
