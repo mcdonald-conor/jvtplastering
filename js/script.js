@@ -88,12 +88,30 @@ document.addEventListener('DOMContentLoaded', () => {
         video.classList.add('loaded');
     }
 
+    // Function to ensure video plays
+    function ensureVideoPlayback() {
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(() => {
+                // Auto-play was prevented
+                // Show play button or try to play again after user interaction
+                document.addEventListener('touchstart', () => {
+                    video.play();
+                }, { once: true });
+            });
+        }
+    }
+
     // Check if video is already loaded
     if (video.readyState >= 3) {
         handleVideoLoad();
+        ensureVideoPlayback();
     } else {
         // Listen for when video can play through
-        video.addEventListener('canplaythrough', handleVideoLoad);
+        video.addEventListener('canplaythrough', () => {
+            handleVideoLoad();
+            ensureVideoPlayback();
+        });
     }
 
     // Handle mobile devices and slow connections
@@ -104,8 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // If on slow connection or mobile data, pause video
             if (connection.saveData ||
                 connection.effectiveType === 'slow-2g' ||
-                connection.effectiveType === '2g' ||
-                connection.effectiveType === '3g') {
+                connection.effectiveType === '2g') {
                 video.pause();
                 video.removeAttribute('autoplay');
                 video.preload = 'none';
@@ -127,8 +144,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (entry.isIntersecting) {
                     // Only load video when in viewport
                     if (video.preload === 'none') {
-                        video.preload = 'metadata';
+                        video.preload = 'auto';
                     }
+                    ensureVideoPlayback();
                     videoObserver.unobserve(video);
                 }
             });
