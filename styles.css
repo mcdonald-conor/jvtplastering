@@ -1261,3 +1261,90 @@ img {
 .nav-menu.active {
     display: none;
 }
+
+/* Areas Section */
+#areas {
+    background: var(--light-color);
+    padding: 6rem 1rem;
+}
+
+.areas-grid {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.areas-content {
+    background: #fff;
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.areas-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+    line-height: 1.8;
+}
+
+.areas-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.area-link {
+    display: inline-block;
+    padding: 1rem 1.5rem;
+    background: var(--secondary-color);
+    color: var(--primary-color);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    border: 1px solid var(--border-color);
+}
+
+.area-link:hover {
+    background: var(--primary-color);
+    color: var(--light-color);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border-color: var(--primary-color);
+}
+
+/* Area Hero Styles */
+.area-hero {
+    min-height: 60vh;
+    background: linear-gradient(var(--gradient-overlay), var(--gradient-overlay)), url('../images/plastering-hero.webp');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6rem 1rem 3rem;
+    margin-top: -80px;
+}
+
+.area-hero .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.area-hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+    .areas-list {
+        grid-template-columns: 1fr;
+    }
+
+    .area-hero h1 {
+        font-size: 2rem;
+    }
+}
